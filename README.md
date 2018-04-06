@@ -4,7 +4,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/saschpe/swiftlint.svg)](https://hub.docker.com/r/saschpe/swiftlint/)
 [![Docker Build Status](https://img.shields.io/docker/build/saschpe/swiftlint.svg)](https://hub.docker.com/r/saschpe/swiftlint/)
 
-[Docker container based on Alpine Linux.
+Docker container based on Alpine Linux.
 
 
 ## Usage
