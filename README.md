@@ -12,15 +12,16 @@ Invoke the container just like *swiftlint* ifself:
 
     docker run --rm saschpe/swiftlint --help
 
-Assuming you want to format all CMake files in a directory
+Assuming you want to lint all Swift files in a directory
 *src*, a full example might look like this:
 
-    cmake_files=$(find . \( -name CMakeLists.txt -o -name *.cmake \) -exec echo /opt/{} \;)
+    cd src/
     docker run \
         --rm \
-        --privileged=true \
+        --security-opt label=disable \
         --volume ${PWD}:/opt \
-        saschpe/swiftlint ${cmake_files}
+        --workdir /opt \
+        saschpe/swiftlint
 
 Just put this into a script for easier invocation.
 
