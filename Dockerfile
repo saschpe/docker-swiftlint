@@ -1,4 +1,4 @@
-FROM swift:4.0.3
+FROM swift:4.2.1
 LABEL maintainer="Sascha Peilicke <sascha@peilicke.de"
 LABEL description="SwiftLint"
 
