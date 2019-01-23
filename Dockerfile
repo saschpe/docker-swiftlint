@@ -1,8 +1,11 @@
-FROM swift:4.0.3
+FROM swift:4.2.1
 LABEL maintainer="Sascha Peilicke <sascha@peilicke.de"
-LABEL description="SwiftLint"
 
-RUN git clone https://github.com/realm/SwiftLint.git \
+ARG swiftlint=0.30.0
+
+LABEL description="SwiftLint ${swiftlint}"
+
+RUN git clone --branch ${swiftlint} https://github.com/realm/SwiftLint.git \
     && cd SwiftLint \
     && swift build --configuration release --static-swift-stdlib \
     && mv `swift build --configuration release --static-swift-stdlib --show-bin-path`/swiftlint /usr/bin \
