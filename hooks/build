@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for swiftlint in ${SWIFTLINT[*]} ; do
+    ./scripts/docker/build \
+        --swiftlint ${swiftlint} \
+        --docker-push
+done
+
