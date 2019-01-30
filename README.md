@@ -10,7 +10,7 @@ Docker container based on Alpine Linux.
 ## Usage
 Invoke the container just like *swiftlint* ifself:
 
-    docker run --rm saschpe/swiftlint --help
+    docker run --rm saschpe/swiftlint help
 
 Assuming you want to lint all Swift files in a directory
 *src*, a full example might look like this:
