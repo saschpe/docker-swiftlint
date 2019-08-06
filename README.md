@@ -4,39 +4,38 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/saschpe/swiftlint.svg)](https://hub.docker.com/r/saschpe/swiftlint/)
 [![Docker Build Status](https://img.shields.io/docker/build/saschpe/swiftlint.svg)](https://hub.docker.com/r/saschpe/swiftlint/)
 
-Docker container based on Alpine Linux.
+SwiftLint container based on Alpine Linux.
 
 
 ## Usage
 Invoke the container just like *swiftlint* ifself:
 
-    docker run --rm saschpe/swiftlint --help
+```bash
+docker run --rm saschpe/swiftlint version
+```
 
 Assuming you want to lint all Swift files in a directory
 *src*, a full example might look like this:
 
-    cd src/
-    docker run \
-        --rm \
-        --security-opt label=disable \
-        --volume ${PWD}:/opt \
-        --workdir /opt \
-        saschpe/swiftlint
+```bash
+cd src/
+docker run \
+    --rm \
+    --security-opt label=disable \
+    --volume ${PWD}:/opt \
+    --workdir /opt \
+    saschpe/swiftlint
+```
 
 Just put this into a script for easier invocation.
 
 
-## Scripts
-These scripts simplify various tasks related to container building and
-publishing.
+## Development
+To build the container image with with the default SwiftLint version, invoke:
 
-    .
-    └─── scripts
-        ├── docker
-        │   ├── build           Build the container locally
-        │   └── run             Run the container locally
-        ├── inc.constants
-        └── inc.functions
+```bash
+./scripts/build
+```
 
 
 ## License
