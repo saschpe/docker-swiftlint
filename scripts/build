@@ -1,0 +1,71 @@
+#!/bin/bash
+#
+# Script to build the container image.
+#
+# Needs root privileges or 'docker' group membership or simply use Podman.
+#
+
+SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+. "${SCRIPT_DIR}/inc.functions"
+
+
+# Constants
+CONTAINER_NAME=saschpe/swiftlint
+
+
+# Default values
+DEFAULT_VERSION=$(grep swiftlint= "${SCRIPT_DIR}/../Dockerfile" | cut -d"=" -f2)
+
+
+# Functions
+function usage {
+    echo -e "Usage: ${0} [OPTIONS]"
+    echo -e "Options:"
+    echo -e "  --swiftlint VERSION\t(default: ${DEFAULT_VERSION})"
+    echo -e "  --push\t\t(optional)"
+    exit 1
+}
+
+
+# Command-line arguments
+version=${DEFAULT_VERSION}
+while [[ $# -gt 0 ]] ; do
+    key="$1"
+    case $key in
+    --swiftlint)
+        version="$2"
+        shift # past argument
+        ;;
+    --push)
+        image_push=true
+        ;;
+    -h|--help)
+        usage
+        shift # past argument
+        ;;
+    *) # unknown option
+        ;;
+    esac
+    shift # past argument or value
+done
+
+
+# Let's roll
+image_tag=${version}
+
+echo "Building image tag ${image_tag}..."
+safe docker build \
+    --build-arg swiftlint=${version} \
+    --tag ${CONTAINER_NAME}:${image_tag} .
+if [ ${image_push} ] ; then
+    safe docker push ${CONTAINER_NAME}:${image_tag}
+fi
+
+# Update 'latest' tag if script argument match defaults
+if [ ${version} = ${DEFAULT_VERSION} ]; then
+    echo "Tagging as 'latest'..."
+    safe docker tag ${CONTAINER_NAME}:${image_tag} ${CONTAINER_NAME}:latest
+    if [ ${image_push} ] ; then
+        safe docker push ${CONTAINER_NAME}:latest
+    fi
+fi
