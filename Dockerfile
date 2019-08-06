@@ -1,7 +1,7 @@
 FROM swift:4.2.1
 LABEL maintainer="Sascha Peilicke <sascha@peilicke.de"
 
-ARG swiftlint=0.30.0
+ARG swiftlint=0.34.0
 
 LABEL description="SwiftLint ${swiftlint}"
 

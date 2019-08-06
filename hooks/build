@@ -1,8 +1,8 @@
 #!/bin/bash
 
 for version in ${SWIFTLINT[*]} ; do
-    ./scripts/docker/build \
+    ./scripts/build \
         --swiftlint ${version} \
-        --docker-push
+        --push
 done
 
